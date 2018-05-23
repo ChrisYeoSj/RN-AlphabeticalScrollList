@@ -1,0 +1,53 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'alphabeticalList' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for alphabeticalList
+
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'DoubleConversion', podspec: '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'Folly', podspec: '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'glog', podspec: '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  
+  
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'DevSupport',
+    'CxxBridge',
+    'RCTNetwork',
+    'RCTImage',
+    'RCTWebSocket',
+  ]
+
+  target 'alphabeticalListTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'alphabeticalList-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for alphabeticalList-tvOS
+
+  target 'alphabeticalList-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        
+        if target.name == "React"
+            target.remove_from_project
+        end
+    end
+end
+
